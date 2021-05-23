@@ -5,6 +5,7 @@ namespace Audiens\AppnexusClient;
 use Audiens\AppnexusClient\authentication\AuthStrategyInterface;
 use Doctrine\Common\Cache\Cache;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
@@ -53,7 +54,7 @@ class Auth implements ClientInterface
      * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws \Exception
      */
-    public function request($method, $uri, array $options = [])
+    public function request(string $method, $uri, array $options = []): ResponseInterface
     {
         $optionForToken = [
             'headers' => [
@@ -83,7 +84,7 @@ class Auth implements ClientInterface
     /**
      * @inheritDoc
      */
-    public function send(RequestInterface $request, array $options = [])
+    public function send(RequestInterface $request, array $options = []): ResponseInterface
     {
         return $this->client->send($request, $options);
     }
@@ -91,7 +92,7 @@ class Auth implements ClientInterface
     /**
      * @inheritDoc
      */
-    public function sendAsync(RequestInterface $request, array $options = [])
+    public function sendAsync(RequestInterface $request, array $options = []): PromiseInterface
     {
         return $this->client->sendAsync($request, $options);
     }
@@ -99,7 +100,7 @@ class Auth implements ClientInterface
     /**
      * @inheritDoc
      */
-    public function requestAsync($method, $uri, array $options = [])
+    public function requestAsync(string $method, $uri, array $options = []): PromiseInterface
     {
         return $this->client->requestAsync($method, $uri, $options);
     }
@@ -107,7 +108,7 @@ class Auth implements ClientInterface
     /**
      * @inheritDoc
      */
-    public function getConfig($option = null)
+    public function getConfig(?string $option = null)
     {
         return $this->client->getConfig($option);
     }

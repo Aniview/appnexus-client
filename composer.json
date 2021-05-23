@@ -10,7 +10,7 @@
   },
   "require": {
     "php": ">=7.1",
-    "guzzlehttp/guzzle": "^6.2.0|^7",
+    "guzzlehttp/guzzle": "^7",
     "doctrine/cache": "^1.6.0",
     "vlucas/phpdotenv": "^2.2.0||^5.2.0||^5.3.0",
     "zendframework/zend-hydrator": "^2.2.1",
