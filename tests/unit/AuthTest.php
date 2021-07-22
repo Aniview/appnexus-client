@@ -27,7 +27,8 @@ class AuthTest extends TestCase
         $token = 'a_sample_token123456789';
 
         $dummyStream = $this->prophesize(Stream::class);
-        $dummyStream->getContents("{'response:{}'}");
+        $dummyStream->getContents()->willReturn("{'response:{}'}");
+        $dummyStream->rewind()->shouldBeCalled();
 
         $dummyResponse = $this->prophesize(Response::class);
         $dummyResponse->getBody()->willReturn($dummyStream->reveal());

@@ -2,6 +2,7 @@
 
 namespace Audiens\AppnexusClient\entity;
 
+use Laminas\Hydrator\ReflectionHydrator;
 use Zend\Hydrator\Reflection;
 
 trait HydratableTrait
@@ -28,10 +29,10 @@ trait HydratableTrait
     }
 
     /**
-     * @return Reflection
+     * @return ReflectionHydrator
      */
     private static function getHydrator()
     {
-        return new Reflection();
+        return new ReflectionHydrator();
     }
 }

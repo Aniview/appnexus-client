@@ -39,7 +39,7 @@ class FunctionalTestCase extends \PHPUnit\Framework\TestCase
     private function checkEnv(): bool
     {
         try {
-            $dotenv = new Dotenv(__DIR__.'/../');
+            $dotenv = Dotenv::createImmutable(__DIR__.'/../');
             $dotenv->load();
         } catch (\Exception $e) {
         }

@@ -66,7 +66,7 @@ class SegmentBillingRepositoryTest extends TestCase
         $fakeResponse = $this->prophesize(Response::class);
         $stream       = $this->prophesize(Stream::class);
         $stream->getContents()->willReturn($responseBody);
-        $stream->rewind()->willReturn(null)->shouldBeCalled();
+        $stream->rewind()->shouldBeCalled();
         $fakeResponse->getBody()->willReturn($stream->reveal());
 
         $payload = [
@@ -101,7 +101,7 @@ class SegmentBillingRepositoryTest extends TestCase
         $fakeResponse = $this->prophesize(Response::class);
         $stream       = $this->prophesize(Stream::class);
         $stream->getContents()->willReturn($responseBody);
-        $stream->rewind()->willReturn(null)->shouldBeCalled();
+        $stream->rewind()->shouldBeCalled();
         $fakeResponse->getBody()->willReturn($stream->reveal());
 
         $client->request('DELETE', Argument::containingString($id))->willReturn($fakeResponse)->shouldBeCalled();

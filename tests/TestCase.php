@@ -21,7 +21,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
         /** @var ObjectProphecy|Stream $stream */
         $stream = $this->prophesize(Stream::class);
         $stream->getContents()->willReturn($responseBody);
-        $stream->rewind()->willReturn(null)->shouldBeCalled();
+        $stream->rewind()->shouldBeCalled();
         $fakeResponse->getBody()->willReturn($stream->reveal());
 
         return $fakeResponse;
