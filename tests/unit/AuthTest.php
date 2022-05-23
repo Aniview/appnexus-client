@@ -26,14 +26,14 @@ class AuthTest extends TestCase
         $password = 'sample_password';
         $token = 'a_sample_token123456789';
 
-        $dummyStream = $this->prophesize(Stream::class);
+        $dummyStream = $this->prophet->prophesize(Stream::class);
         $dummyStream->getContents()->willReturn("{'response:{}'}");
         $dummyStream->rewind()->shouldBeCalled();
 
-        $dummyResponse = $this->prophesize(Response::class);
+        $dummyResponse = $this->prophet->prophesize(Response::class);
         $dummyResponse->getBody()->willReturn($dummyStream->reveal());
 
-        $authStrategy = $this->prophesize(AuthStrategyInterface::class);
+        $authStrategy = $this->prophet->prophesize(AuthStrategyInterface::class);
 
         $authStrategy->authenticate($username, $password, Argument::any())->willReturn($token)->shouldBeCalled();
 
@@ -43,7 +43,7 @@ class AuthTest extends TestCase
             ],
         ];
 
-        $client = $this->prophesize(ClientInterface::class);
+        $client = $this->prophet->prophesize(ClientInterface::class);
         $client->request('POST', 'random_url', $expectedRequestOptions)->willReturn($dummyResponse->reveal())->shouldBeCalled();
 
         $auth = new Auth($username, $password, $client->reveal(), $authStrategy->reveal());

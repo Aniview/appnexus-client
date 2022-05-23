@@ -1,7 +1,7 @@
 includes:
-    - vendor/phpstan/phpstan/conf/config.level2.neon
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
     - vendor/phpstan/phpstan-deprecation-rules/rules.neon
-    - vendor/jangregor/phpstan-prophecy/src/extension.neon
+    - vendor/jangregor/phpstan-prophecy/extension.neon
 parameters:
     excludes_analyse:
     ignoreErrors:

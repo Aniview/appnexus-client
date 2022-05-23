@@ -5,21 +5,25 @@ namespace Test;
 use Audiens\AppnexusClient\entity\UploadJobStatus;
 use GuzzleHttp\Psr7\Stream;
 use Prophecy\Prophecy\ObjectProphecy;
+use Prophecy\Prophet;
 use Psr\Http\Message\ResponseInterface;
 
 class TestCase extends \PHPUnit\Framework\TestCase
 {
-    protected function setUp()
+    protected Prophet $prophet;
+
+    protected function setUp(): void
     {
         parent::setUp();
+        $this->prophet = new Prophet();
     }
 
     protected function getFakeResponse($responseBody)
     {
         /** @var ObjectProphecy|ResponseInterface $fakeResponse */
-        $fakeResponse = $this->prophesize(ResponseInterface::class);
+        $fakeResponse = $this->prophet->prophesize(ResponseInterface::class);
         /** @var ObjectProphecy|Stream $stream */
-        $stream = $this->prophesize(Stream::class);
+        $stream = $this->prophet->prophesize(Stream::class);
         $stream->getContents()->willReturn($responseBody);
         $stream->rewind()->shouldBeCalled();
         $fakeResponse->getBody()->willReturn($stream->reveal());

@@ -8,6 +8,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Stream;
 use Prophecy\Argument;
+use Prophecy\Prophet;
 use Test\TestCase;
 
 class AdnxStrategyTest extends TestCase
@@ -28,16 +29,16 @@ class AdnxStrategyTest extends TestCase
             ],
         ];
 
-        $cache = $this->prophesize(Cache::class);
+        $cache = $this->prophet->prophesize(Cache::class);
 
         $cache->contains(Argument::any())->willReturn(false)->shouldBeCalled();
         $cache->save(Argument::any(), $token, Argument::type('integer'))->shouldBeCalled();
 
-        $dummyStream = $this->prophesize(Stream::class);
+        $dummyStream = $this->prophet->prophesize(Stream::class);
         $dummyStream->getContents()->willReturn(json_encode($fakeResponseContent));
         $dummyStream->rewind()->shouldBeCalled();
 
-        $dummyResponse = $this->prophesize(Response::class);
+        $dummyResponse = $this->prophet->prophesize(Response::class);
         $dummyResponse->getBody()->willReturn($dummyStream->reveal());
 
         $payload = [
@@ -47,7 +48,7 @@ class AdnxStrategyTest extends TestCase
             ],
         ];
 
-        $client = $this->prophesize(ClientInterface::class);
+        $client = $this->prophet->prophesize(ClientInterface::class);
 
         $client->request('POST', AdnxStrategy::BASE_URL, ['body' => json_encode($payload)])->willReturn($dummyResponse->reveal());
 

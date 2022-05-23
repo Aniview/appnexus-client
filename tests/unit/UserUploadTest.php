@@ -23,7 +23,7 @@ class UserUploadTest extends TestCase
     public function upload_will_throw_an_exception_if_the_file_string_is_empty()
     {
 
-        $client = $this->prophesize(Auth::class);
+        $client = $this->prophet->prophesize(Auth::class);
 
         $userUpload = new UserUpload($client->reveal(), new VoidCache());
 
@@ -39,7 +39,7 @@ class UserUploadTest extends TestCase
     public function get_job_status_will_return_a_job_status()
     {
 
-        $client = $this->prophesize(Auth::class);
+        $client = $this->prophet->prophesize(Auth::class);
         $userUpload = new UserUpload($client->reveal(), new VoidCache());
 
         $uploadTicket = new UploadTicket();
@@ -62,7 +62,7 @@ class UserUploadTest extends TestCase
     public function get_job_status_on_failed_response()
     {
 
-        $client = $this->prophesize(Auth::class);
+        $client = $this->prophet->prophesize(Auth::class);
         $userUpload = new UserUpload($client->reveal(), new VoidCache());
 
         $uploadTicket = new UploadTicket();
@@ -84,7 +84,7 @@ class UserUploadTest extends TestCase
     public function get_upload_hystory_on_failed_response()
     {
 
-        $client = $this->prophesize(Auth::class);
+        $client = $this->prophet->prophesize(Auth::class);
         $userUpload = new UserUpload($client->reveal(), new VoidCache());
 
         $fakeResponse = $this->getFakeResponse($this->getFailedResponse());
@@ -102,7 +102,7 @@ class UserUploadTest extends TestCase
     public function get_upload_hystory_will_return_an_array_of_upload_status()
     {
 
-        $client = $this->prophesize(Auth::class);
+        $client = $this->prophet->prophesize(Auth::class);
         $userUpload = new UserUpload($client->reveal(), new VoidCache());
 
         $fakeResponse = $this->getFakeResponse($this->getUploadHystory());
@@ -125,7 +125,7 @@ class UserUploadTest extends TestCase
     public function get_upload_ticker_will_return_an_upload_ticket()
     {
 
-        $client = $this->prophesize(Auth::class);
+        $client = $this->prophet->prophesize(Auth::class);
         $userUpload = new UserUpload($client->reveal(), new VoidCache());
 
         $fakeResponse = $this->getFakeResponse($this->getUploadTicket());

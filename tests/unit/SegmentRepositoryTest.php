@@ -19,7 +19,7 @@ class SegmentRepositoryTest extends TestCase
      */
     public function add_will_create_a_new_segment_and_return_a_repository_response()
     {
-        $client = $this->prophesize(Auth::class);
+        $client = $this->prophet->prophesize(Auth::class);
 
         $repository = new SegmentRepository($client->reveal(), new VoidCache(), getenv('MEMBER_ID'));
 
@@ -45,7 +45,7 @@ class SegmentRepositoryTest extends TestCase
      */
     public function update_will_edit_an_existing_segment()
     {
-        $client = $this->prophesize(Auth::class);
+        $client = $this->prophet->prophesize(Auth::class);
 
         $repository = new SegmentRepository($client->reveal(), new VoidCache(), getenv('MEMBER_ID'));
 
@@ -61,8 +61,8 @@ class SegmentRepositoryTest extends TestCase
             ]
         );
 
-        $fakeResponse = $this->prophesize(Response::class);
-        $stream       = $this->prophesize(Stream::class);
+        $fakeResponse = $this->prophet->prophesize(Response::class);
+        $stream       = $this->prophet->prophesize(Stream::class);
         $stream->getContents()->willReturn($responseBody);
         $stream->rewind()->shouldBeCalled();
         $fakeResponse->getBody()->willReturn($stream->reveal());
@@ -83,7 +83,7 @@ class SegmentRepositoryTest extends TestCase
      */
     public function remove_will_remove_an_existing_segment()
     {
-        $client     = $this->prophesize(Auth::class);
+        $client     = $this->prophet->prophesize(Auth::class);
         $repository = new SegmentRepository($client->reveal(), new VoidCache(), getenv('MEMBER_ID'));
 
         $id = '12346';
@@ -96,8 +96,8 @@ class SegmentRepositoryTest extends TestCase
             ]
         );
 
-        $fakeResponse = $this->prophesize(Response::class);
-        $stream       = $this->prophesize(Stream::class);
+        $fakeResponse = $this->prophet->prophesize(Response::class);
+        $stream       = $this->prophet->prophesize(Stream::class);
         $stream->getContents()->willReturn($responseBody);
         $stream->rewind()->shouldBeCalled();
         $fakeResponse->getBody()->willReturn($stream->reveal());
@@ -114,7 +114,7 @@ class SegmentRepositoryTest extends TestCase
      */
     public function find_one_by_id_will_return_a_segment()
     {
-        $client     = $this->prophesize(Auth::class);
+        $client     = $this->prophet->prophesize(Auth::class);
         $repository = new SegmentRepository($client->reveal(), new VoidCache(), getenv('MEMBER_ID'));
 
         $id = '5012';
@@ -133,7 +133,7 @@ class SegmentRepositoryTest extends TestCase
      */
     public function find_all_will_return_an_array_of_segments()
     {
-        $client     = $this->prophesize(Auth::class);
+        $client     = $this->prophet->prophesize(Auth::class);
         $repository = new SegmentRepository($client->reveal(), new VoidCache(), getenv('MEMBER_ID'));
 
         $fakeResponse = $this->getFakeResponse($this->getMultipleSegments());

@@ -25,7 +25,7 @@ class ReportTest extends TestCase
     public function get_report_ticket_will_return_a_report_ticket()
     {
 
-        $client = $this->prophesize(Auth::class);
+        $client = $this->prophet->prophesize(Auth::class);
 
         $fakeResponse = $this->getFakeResponse($this->getReportTicket());
 
@@ -45,7 +45,7 @@ class ReportTest extends TestCase
     public function get_report_ticket_will_throw_an_exception_if_the_response_is_not_ok()
     {
 
-        $client = $this->prophesize(Auth::class);
+        $client = $this->prophet->prophesize(Auth::class);
 
         $fakeResponse = $this->getFakeResponse($this->getFailedResponse());
 
@@ -65,10 +65,10 @@ class ReportTest extends TestCase
     public function get_report_status_will_return_a_status_object()
     {
 
-        $client = $this->prophesize(Auth::class);
+        $client = $this->prophet->prophesize(Auth::class);
 
-        $fakeResponse = $this->prophesize(Response::class);
-        $stream = $this->prophesize(Stream::class);
+        $fakeResponse = $this->prophet->prophesize(Response::class);
+        $stream = $this->prophet->prophesize(Stream::class);
         $stream->getContents()->willReturn($this->getReportResponse());
         $fakeResponse->getBody()->willReturn($stream->reveal());
 
@@ -94,7 +94,7 @@ class ReportTest extends TestCase
     public function get_report_status_will_return_an_object_containing_the_downaload_id()
     {
 
-        $client = $this->prophesize(Auth::class);
+        $client = $this->prophet->prophesize(Auth::class);
 
         $uploadTicket = new ReportTicket();
         $uploadTicket->setReportId('_a_job_id');
